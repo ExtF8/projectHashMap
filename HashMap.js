@@ -34,15 +34,21 @@ export default class HashMap {
             this.buckets[index] = new HashNode(key, value);
             this.size++;
         } else {
-            // If the bucket already has nodes, handle collisions by creating a linked list
-            const linkedList = new LinkedList();
-            linkedList.append(
-                this.buckets[index].key,
-                this.buckets[index].value
-            );
-            linkedList.append(key, value);
-            this.buckets[index] = linkedList;
-            this.size++;
+            // If bucket is LinkedList and contains nodes add new
+            if (this.buckets[index] instanceof LinkedList) {
+                this.buckets[index].append(key, value);
+                this.size++;
+            } else {
+                // Create a new LinkedList and append existing node and new node
+                const linkedList = new LinkedList();
+                linkedList.append(
+                    this.buckets[index].key,
+                    this.buckets[index].value
+                );
+                linkedList.append(key, value);
+                this.buckets[index] = linkedList;
+                this.size++;
+            }
         }
     }
 
