@@ -1,9 +1,9 @@
-import { HashNode } from './HashNode.js';
+import HashNode from './HashNode.js';
 
 /**
  * Represents a linked list.
  */
-export class LinkedList {
+export default class LinkedList {
     /**
      * Creates a new instance of LinkedLists.
      * @param {Node} head - The head node of the linked list.
@@ -71,6 +71,55 @@ export class LinkedList {
             let errorMessage = `Node at index ${index} does not exist in this list`;
             return errorMessage;
         }
+    }
+
+    // Removes the node at the given index
+    removeAt(index) {
+        if (index < 0 || !this.head) {
+            return;
+        }
+
+        if (index === 0) {
+            this.head = this.head.nextNode;
+            // If the list becomes empty
+            if (!this.head) {
+                this.tail = null;
+            }
+            return;
+        }
+
+        let current = this.head;
+        let previous = null;
+        let currentIndex = 0;
+
+        while (current && currentIndex < index) {
+            previous = current;
+            current = current.nextNode;
+            currentIndex++;
+        }
+
+        if (currentIndex === index && current) {
+            previous.nextNode = current.nextNode;
+            // If removed node was tail
+            if (!current.nextNode) {
+                this.tail = previous;
+            }
+        }
+    }
+
+    indexOf(key) {
+        let current = this.head;
+        let index = 0;
+
+        while (current) {
+            if (current.key === key) {
+                return index;
+            }
+            current = current.nextNode;
+            index++;
+        }
+
+        return -1; // Key not found
     }
 
     // Represents LinkedList objects as strings, to print them
