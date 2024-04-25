@@ -29,7 +29,7 @@ To get started with the LinkedList project, follow these steps:
 
 1. Clone the repository to your local machine using the following command:
     ```
-    git clone <repository-url>
+    git clone git@github.com:ExtF8/projectHashMap.git
     ```
 2. Navigate to the project directory:
     ```
