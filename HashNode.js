@@ -1,7 +1,7 @@
 /**
  * Represents a node in a hash map.
  */
-export class HashNode {
+export default class HashNode {
     /**
      * Creates a new instance of HashNode.
      * @param {*} key - The key associated with the value.
