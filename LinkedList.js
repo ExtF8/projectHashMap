@@ -1,9 +1,9 @@
-import { HashNode } from './HashNode.js';
+import HashNode from './HashNode.js';
 
 /**
  * Represents a linked list.
  */
-export class LinkedList {
+export default class LinkedList {
     /**
      * Creates a new instance of LinkedLists.
      * @param {Node} head - The head node of the linked list.
@@ -14,8 +14,8 @@ export class LinkedList {
     }
 
     // Adds a new node containing value to the end of the list
-    append(value) {
-        const newNode = new HashNode(value);
+    append(key, value) {
+        const newNode = new HashNode(key, value);
         if (!this.head) {
             this.head = newNode;
             this.tail = newNode;
@@ -23,17 +23,6 @@ export class LinkedList {
         }
         this.tail.nextNode = newNode;
         this.tail = newNode;
-    }
-
-    // Adds a new node containing value to the start of the list
-    prepend(value) {
-        const newNode = new HashNode(value);
-        if (!this.head) {
-            this.head = newNode;
-            this.tail = newNode;
-        }
-        newNode.nextNode = this.head;
-        this.head = newNode;
     }
 
     // Returns the total number of nodes in the list
@@ -50,12 +39,12 @@ export class LinkedList {
     }
 
     // Returns the first node of the list
-    head() {
+    getHead() {
         return this.head;
     }
 
     // Returns the last node of the list
-    tail() {
+    getTail() {
         return this.tail;
     }
 
@@ -81,113 +70,6 @@ export class LinkedList {
         if (index > count) {
             let errorMessage = `Node at index ${index} does not exist in this list`;
             return errorMessage;
-        }
-    }
-
-    // Removes the last element from the list
-    pop() {
-        // List empty
-        if (!this.head) {
-            return;
-        }
-
-        // Is last element
-        if (!this.head.nextNode) {
-            this.head = null;
-            this.tail = null;
-            return;
-        }
-
-        let current = this.head;
-        while (current.nextNode !== this.tail) {
-            current = current.nextNode;
-        }
-
-        current.nextNode = null;
-        this.tail = current;
-    }
-
-    // Returns true if the passed value is in the list otherwise returns false
-    contains(value) {
-        let current = this.head;
-
-        while (current) {
-            if (current.value == value) {
-                return true;
-            }
-            current = current.nextNode;
-        }
-
-        return false;
-    }
-
-    // Returns the index of the node containing value, or null if not found
-    find(value) {
-        let current = this.head;
-        let index = 0;
-
-        while (current) {
-            if (current.value == value) {
-                return index;
-            }
-            current = current.nextNode;
-            index++;
-        }
-
-        return null;
-    }
-
-    // Represents LinkedList objects as strings, to print them
-    // The format: ( value ) -> ( value ) -> ( value ) -> null
-    toString() {
-        let current = this.head;
-        let result = '';
-
-        while (current) {
-            result += `( ${current.value} ) -> `;
-            current = current.nextNode;
-        }
-
-        result += 'null';
-        return result;
-    }
-
-    // Inserts a new node with provided value at the given index
-    insertAt(value, index) {
-        if (index < 0) {
-            return;
-        }
-
-        const newNode = new HashNode(value);
-
-        // At the beginning of the list
-        if (index === 0) {
-            newNode.nextNode = this.head;
-            this.head = newNode;
-
-            if (!this.tail) {
-                this.tail = newNode;
-            }
-
-            return;
-        }
-
-        let current = this.head;
-        let previous = null;
-        let currentIndex = 0;
-
-        while (current && currentIndex < index) {
-            previous = current;
-            current = current.nextNode;
-            currentIndex++;
-        }
-
-        if (currentIndex === index) {
-            previous.nextNode = newNode;
-            newNode.nextNode = current;
-            if (!current) {
-                this.tail = newNode;
-            }
         }
     }
 
@@ -223,6 +105,36 @@ export class LinkedList {
                 this.tail = previous;
             }
         }
+    }
+
+    indexOf(key) {
+        let current = this.head;
+        let index = 0;
+
+        while (current) {
+            if (current.key === key) {
+                return index;
+            }
+            current = current.nextNode;
+            index++;
+        }
+
+        return -1; // Key not found
+    }
+
+    // Represents LinkedList objects as strings, to print them
+    // The format: ( value ) -> ( value ) -> ( value ) -> null
+    toString() {
+        let current = this.head;
+        let result = '';
+
+        while (current) {
+            result += `( ${current.value} ) -> `;
+            current = current.nextNode;
+        }
+
+        result += 'null';
+        return result;
     }
 
     // List all nodes
