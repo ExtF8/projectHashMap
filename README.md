@@ -33,7 +33,7 @@ To get started with the LinkedList project, follow these steps:
     ```
 2. Navigate to the project directory:
     ```
-    cd projectLinkedLists
+    cd projectHashMap
     ```
 3. Running Tests:
 
