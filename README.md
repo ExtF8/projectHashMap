@@ -25,7 +25,7 @@ This project serves as a foundational exercise in understanding hash map and the
 
 ## Usage
 
-To get started with the LinkedList project, follow these steps:
+To get started with the Hash Map project, follow these steps:
 
 1. Clone the repository to your local machine using the following command:
     ```
@@ -37,7 +37,7 @@ To get started with the LinkedList project, follow these steps:
     ```
 3. Running Tests:
 
--   The `script.js` file contains test cases for the LinkedList implementation.
+-   The `script.js` file contains test cases for the Hash Map implementation.
 -   To run the tests, use the following command:
     ```
     npm run start
